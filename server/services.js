@@ -28,10 +28,10 @@ const addUser = (users, user) => {
   return userList;
 };
 
-const innactivityTimer = (time, user, cb) => {
-  setTimeout(() => {
+const innactivityTimer = (time, user, socket, cb) => {
+  return (socket.user.timer = setTimeout(() => {
     cb(user);
-  }, time);
+  }, time));
 };
 
 module.exports = {
