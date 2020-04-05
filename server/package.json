@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon server"
+    "dev": "nodemon server",
+    "log": "DEBUG=* node server.js"
   },
   "keywords": [],
   "author": "Scapigliata",
@@ -15,7 +16,8 @@
     "express": "^4.17.1",
     "morgan": "^1.10.0",
     "socket.io": "^2.3.0",
-    "uuid": "^7.0.2"
+    "uuid": "^7.0.2",
+    "uuidv4": "^6.0.7"
   },
   "devDependencies": {
     "nodemon": "^2.0.2"

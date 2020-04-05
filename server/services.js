@@ -1,4 +1,4 @@
-const uuid = require('uuid/v4');
+const { uuid } = require('uuidv4');
 
 const createUser = ({ name = '' } = {}) => ({
   id: uuid(),
@@ -28,10 +28,17 @@ const addUser = (users, user) => {
   return userList;
 };
 
+const innactivityTimer = (time, user, cb) => {
+  setTimeout(() => {
+    cb(user);
+  }, time);
+};
+
 module.exports = {
   createUser,
   createMessage,
   addUser,
   deleteUser,
   verifyUser,
+  innactivityTimer,
 };

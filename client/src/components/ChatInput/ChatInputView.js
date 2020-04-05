@@ -5,7 +5,7 @@ import {
   OutlinedInput,
   InputAdornment,
 } from '@material-ui/core';
-import { MESSAGE_SENT, TYPING } from '../../store/actions/types';
+import { MESSAGE_SENT } from '../../store/actions/types';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -16,8 +16,7 @@ const ChatInputView = ({ socket, user }) => {
   const [message, setMessage] = useState('');
   const [alertTyping, toggleAlertTyping] = useState(false);
 
-  const handleOnChange = e => {
-    const { value } = e.target;
+  const handleOnChange = (e) => {
     setMessage(e.target.value);
   };
 
@@ -33,7 +32,7 @@ const ChatInputView = ({ socket, user }) => {
     }
   }, [message]);
 
-  const handleOnSubmit = e => {
+  const handleOnSubmit = (e) => {
     e.preventDefault();
     socket.emit(MESSAGE_SENT, { user, message });
     setMessage('');

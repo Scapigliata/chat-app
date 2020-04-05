@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import moment from 'moment';
-
+import { uuid } from 'uuidv4';
 import Typing from './Typing';
 
 const MessageContainer = styled.div`
@@ -19,21 +19,33 @@ const Time = styled.p`
   font-size: 10px;
 `;
 
-const Messages = ({ userName, typing, messages, usersTyping }) => {
+const TypingMessage = styled.i`
+  font-size: 10px;
+  color: gray;
+`;
+
+const Messages = ({ userName, messages, usersTyping }) => {
   return (
     <MessageContainer>
       {messages &&
-        messages.map(({ time, message, user }) => (
-          <MessageContainer key={time} currentUser={user === userName.name}>
-            <User currentUser={user === userName.name}>{user}</User>
-            <Message key={message}>{message}</Message>
-            <Time>{moment(time).fromNow()}</Time>
-          </MessageContainer>
-        ))}
-      {Object.values(usersTyping).map(o => (
-        <Typing type="bubbles" color="blue" height={100} width={50} />
-      ))}
-      {typing && <Typing type="bubbles" color="blue" height={100} width={50} />}
+        messages.map(({ id, time, user, message }) => {
+          return (
+            <MessageContainer key={uuid()} currentUser={user === userName.name}>
+              <User currentUser={user === userName.name}>{user}</User>
+              <Message>{message}</Message>
+              <Time>{moment(time).fromNow()}</Time>
+            </MessageContainer>
+          );
+        })}
+      {Object.values(usersTyping).map(
+        (o) =>
+          o && (
+            <div key={o}>
+              <TypingMessage>{o} is typing...</TypingMessage>
+              <Typing type="bubbles" color="blue" height={100} width={50} />
+            </div>
+          )
+      )}
     </MessageContainer>
   );
 };
