@@ -2,21 +2,11 @@
 
 Realtime chat app using Socket.io.
 <br/>
-Client:
-\n
-React
-Redux
-React router dom
-Socket.io-client
-Styled Components
-Material UI
-<br/>
-Server:
-Express
-Socket.io
-Winston
 
+Client:
+React, Redux, React router dom, Socket.io-client, Styled Components, Material UI
 <br/>
+Server: Express, Socket.io, Winston
 
 ## Getting started:
 
@@ -28,7 +18,7 @@ SERVER: In the project directory, cd into server and run:
 
 ### `npm i && npm run dev`
 
-To use the debug logger and start the server run:
+To use the debug logger and start the server, run:
 
 ### `npm run log`
 
