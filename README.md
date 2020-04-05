@@ -23,3 +23,14 @@ To use the debug logger and start the server, run:
 ### `npm run log`
 
 <br/>
+
+## LandingPage
+
+![LandingPage](LandingPage.png)
+
+## Chat
+![Chat](Chat.png)
+
+## Innactive User
+![Innactive User](InnactiveUser.png)
+
