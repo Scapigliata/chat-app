@@ -28,7 +28,7 @@ SERVER: In the project directory, cd into server and run:
 
 ### `npm i && npm run dev`
 
-To use the debug logger and start the server run:
+To use the debug logger and start the server, run:
 
 ### `npm run log`
 
