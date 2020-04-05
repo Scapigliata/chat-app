@@ -49,7 +49,6 @@ const Drawer = ({ logout, chats, user, activeChat }) => {
               anchor={anchor}
               toggleDrawer={toggleDrawer}
             />
-            }
           </SwipeableDrawer>
         </Fragment>
       ))}
