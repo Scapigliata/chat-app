@@ -61,7 +61,7 @@ const Chat = ({
       }
       setUserTyping(userRes);
     });
-  }, [socket]);
+  }, [socket, setUserTyping, user.id, messageRecieved]);
 
   return (
     <Container>

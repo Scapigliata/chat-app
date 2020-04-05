@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import io from 'socket.io-client';
 
 import Form from '../../components/Form';
@@ -15,8 +15,6 @@ const LandingPageView = ({
   userConnected,
   clearMessages,
 }) => {
-  let _isMounted = useRef(true);
-
   const initializeSocket = () => {
     const socket = io(URL);
     socket.on('connect', () => {
@@ -38,9 +36,6 @@ const LandingPageView = ({
 
   useEffect(() => {
     initializeSocket();
-    return () => {
-      _isMounted.current = false;
-    };
   }, []);
 
   return (

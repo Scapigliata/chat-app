@@ -41,7 +41,7 @@ const ChatInputView = ({ socket, user }) => {
       socket.emit('TYPING', user);
       toggleAlertTyping(false);
     }
-  }, [message]);
+  }, [message, alertTyping, socket, user]);
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
