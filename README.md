@@ -4,9 +4,9 @@ Realtime chat app using Socket.io.
 <br/>
 
 Client:
-React, Redux, React router dom, Socket.io-client, Styled Components, Material UI
+React, Redux, React router dom, Socket.io-client, Styled Components, Material UI.
 <br/>
-Server: Express, Socket.io, Winston
+Server: Express, Socket.io, Winston.
 
 ## Getting started:
 
