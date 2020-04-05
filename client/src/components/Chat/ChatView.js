@@ -43,7 +43,6 @@ const Chat = ({
       const { name, id } = data.user;
       const { message } = data;
 
-      console.log(data);
       messageRecieved({
         ...data,
         user: name,

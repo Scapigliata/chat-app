@@ -58,8 +58,9 @@ io.on('connection', (socket) => {
 
   socket.on('MESSAGE_SENT', ({ user, message }) => {
     logger.info('MESSAGE SENT', message);
-
-    clearTimeout(socket.user.timer);
+    if (user) {
+      clearTimeout(socket.user.timer);
+    }
     setTimer(user, socket);
     socket.messages = createMessage(message, user);
     io.emit('MESSAGE_RECIEVED', createMessage(message, user.name));

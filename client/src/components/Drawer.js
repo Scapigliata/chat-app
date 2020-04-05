@@ -4,9 +4,10 @@ import Options from './Options';
 import styled from 'styled-components';
 
 const Container = styled.div`
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 0;
+  background: mediumaquamarine;
 `;
 
 const Drawer = ({ logout, chats, user, activeChat }) => {
@@ -17,7 +18,7 @@ const Drawer = ({ logout, chats, user, activeChat }) => {
     right: false,
   });
 
-  const toggleDrawer = (anchor, open) => event => {
+  const toggleDrawer = (anchor, open) => (event) => {
     if (
       event &&
       event.type === 'keydown' &&
@@ -31,9 +32,9 @@ const Drawer = ({ logout, chats, user, activeChat }) => {
 
   return (
     <Container>
-      {['left'].map(anchor => (
+      {['left'].map((anchor) => (
         <Fragment key={anchor}>
-          <Button onClick={toggleDrawer(anchor, true)}>Options</Button>
+          <Button onClick={toggleDrawer(anchor, true)}>Menu</Button>
           <SwipeableDrawer
             anchor={anchor}
             open={state[anchor]}

@@ -12,6 +12,17 @@ const Container = styled.div`
   width: 100vw;
 `;
 
+const Form = styled.form`
+  display: flex;
+`;
+
+const Button = styled.button`
+  background: ${({ disabled }) => (disabled ? 'darkseagreen' : 'green')};
+  color: ${({ disabled }) => (disabled ? '' : 'white')};
+  border: none;
+  width: 100px;
+`;
+
 const ChatInputView = ({ socket, user }) => {
   const [message, setMessage] = useState('');
   const [alertTyping, toggleAlertTyping] = useState(false);
@@ -40,7 +51,7 @@ const ChatInputView = ({ socket, user }) => {
 
   return (
     <Container>
-      <form onSubmit={handleOnSubmit}>
+      <Form onSubmit={handleOnSubmit}>
         <FormControl fullWidth variant="outlined">
           <InputLabel htmlFor="outlined-adornment-amount">
             {user.name}
@@ -59,11 +70,11 @@ const ChatInputView = ({ socket, user }) => {
             }
             labelWidth={60}
           />
-          <button disabled={message.length < 1} type="submit">
-            Send
-          </button>
         </FormControl>
-      </form>
+        <Button disabled={message.length < 1} type="submit">
+          Send
+        </Button>
+      </Form>
     </Container>
   );
 };

@@ -4,9 +4,15 @@ import moment from 'moment';
 import { uuid } from 'uuidv4';
 import Typing from './Typing';
 
+const Container = styled.div`
+  width: 90vw;
+  margin: 20px;
+`;
+
 const MessageContainer = styled.div`
-  width: 100vw;
   text-align: ${({ currentUser }) => (currentUser ? 'right' : 'left')};
+  margin-bottom: 100px;
+  margin-left: ${({ currentUser }) => (currentUser ? '200px' : '0')};
 `;
 
 const Message = styled.p``;
@@ -26,7 +32,7 @@ const TypingMessage = styled.i`
 
 const Messages = ({ userName, messages, usersTyping }) => {
   return (
-    <MessageContainer>
+    <Container>
       {messages &&
         messages.map(({ id, time, user, message }) => {
           return (
@@ -46,7 +52,7 @@ const Messages = ({ userName, messages, usersTyping }) => {
             </div>
           )
       )}
-    </MessageContainer>
+    </Container>
   );
 };
 
