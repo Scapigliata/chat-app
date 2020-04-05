@@ -1,10 +1,20 @@
 ## Chat App
 
 Realtime chat app using Socket.io.
+<br/>
 
-React frontend + Express backend.
-Socket.io
-Styled Components
+Client:
+React,
+Redux,
+React router dom,
+Socket.io-client,
+Styled Components,
+Material UI
+<br/>
+Server:
+Express,
+Socket.io,
+Winston
 
 <br/>
 
