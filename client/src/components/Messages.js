@@ -31,6 +31,7 @@ const TypingMessage = styled.i`
 `;
 
 const Messages = ({ userName, messages, usersTyping }) => {
+  console.log(messages);
   return (
     <Container>
       {messages &&

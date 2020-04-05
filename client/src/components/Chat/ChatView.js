@@ -38,7 +38,10 @@ const Chat = ({
         message: `${data.user} has joined the chat`,
       })
     );
-    socket.on(MESSAGE_RECIEVED, (data) => messageRecieved(data));
+    socket.on(MESSAGE_RECIEVED, (data) => {
+      console.log(data);
+      messageRecieved(data);
+    });
     socket.on(USER_DISCONNECTED, (data) => {
       const { name, id } = data.user;
       const { message } = data;
