@@ -57,6 +57,7 @@ const ChatInputView = ({ socket, user }) => {
             {user.name}
           </InputLabel>
           <OutlinedInput
+            autoFocus
             id="outlined-adornment-amount"
             value={message}
             onChange={handleOnChange}
