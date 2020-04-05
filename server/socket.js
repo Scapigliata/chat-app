@@ -53,7 +53,6 @@ module.exports = (socket) => {
   });
 
   socket.on('MESSAGE_SENT', ({ user, message }) => {
-    console.log(createMessage(message, user.name));
     logger.info(`USER: ${user.name} sent a message`);
     if (user) {
       clearTimeout(socket.user.timer);

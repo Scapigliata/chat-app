@@ -30,31 +30,28 @@ const TypingMessage = styled.i`
   color: gray;
 `;
 
-const Messages = ({ userName, messages, usersTyping }) => {
-  console.log(messages);
-  return (
-    <Container>
-      {messages &&
-        messages.map(({ id, time, user, message }) => {
-          return (
-            <MessageContainer key={uuid()} currentUser={user === userName.name}>
-              <User currentUser={user === userName.name}>{user}</User>
-              <Message>{message}</Message>
-              <Time>{moment(time).fromNow()}</Time>
-            </MessageContainer>
-          );
-        })}
-      {Object.values(usersTyping).map(
-        (o) =>
-          o && (
-            <div key={o}>
-              <TypingMessage>{o} is typing...</TypingMessage>
-              <Typing type="bubbles" color="blue" height={100} width={50} />
-            </div>
-          )
-      )}
-    </Container>
-  );
-};
+const Messages = ({ userName, messages, usersTyping }) => (
+  <Container>
+    {messages &&
+      messages.map(({ id, time, user, message }) => {
+        return (
+          <MessageContainer key={uuid()} currentUser={user === userName.name}>
+            <User currentUser={user === userName.name}>{user}</User>
+            <Message>{message}</Message>
+            <Time>{moment(time).fromNow()}</Time>
+          </MessageContainer>
+        );
+      })}
+    {Object.values(usersTyping).map(
+      (o) =>
+        o && (
+          <div key={o}>
+            <TypingMessage>{o} is typing...</TypingMessage>
+            <Typing type="bubbles" color="blue" height={100} width={50} />
+          </div>
+        )
+    )}
+  </Container>
+);
 
 export default Messages;

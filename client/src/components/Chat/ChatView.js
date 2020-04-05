@@ -39,7 +39,6 @@ const Chat = ({
       })
     );
     socket.on(MESSAGE_RECIEVED, (data) => {
-      console.log(data);
       messageRecieved(data);
     });
     socket.on(USER_DISCONNECTED, (data) => {
