@@ -59,7 +59,7 @@ const LandingPageView = ({
           <Chat />
         </>
       )}
-      <Message bool={serverState === 'Connected' ? true : false}>
+      <Message bool={serverState === 'Online' ? true : false}>
         {serverState}
       </Message>
     </div>

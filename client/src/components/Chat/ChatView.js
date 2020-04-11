@@ -22,6 +22,7 @@ const ChatView = ({
   setUserTyping,
   stopUserTyping,
   clearMessages,
+  serverError,
 }) => {
   useEffect(() => {
     if (!socket) {
@@ -34,7 +35,8 @@ const ChatView = ({
       messageRecieved,
       setUserTyping,
       stopUserTyping,
-      clearMessages
+      clearMessages,
+      serverError
     );
   }, [
     socket,
@@ -44,6 +46,7 @@ const ChatView = ({
     messageRecieved,
     clearMessages,
     stopUserTyping,
+    serverError,
   ]);
 
   return (

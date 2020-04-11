@@ -7,7 +7,7 @@ import {
 
 const initalState = {
   socket: null,
-  serverState: '',
+  serverState: 'Offline',
 };
 
 const configReducer = (state = initalState, { type, payload }) => {
@@ -15,9 +15,9 @@ const configReducer = (state = initalState, { type, payload }) => {
     case INIT_SOCKET:
       return { ...state, socket: payload };
     case SERVER_CONNECTED:
-      return { ...state, serverState: 'Connected' };
+      return { ...state, serverState: 'Online' };
     case SERVER_DISCONNECTED:
-      return { ...state, serverState: 'Disconnected' };
+      return { ...state, serverState: 'Offline' };
     case SERVER_ERROR:
       return { ...state, serverState: 'Error' };
     default:

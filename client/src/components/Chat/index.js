@@ -14,6 +14,7 @@ import {
   setUserTyping,
   stopUserTyping,
   clearMessages,
+  serverError,
 } from '../../store/actions/actionCreators';
 
 const mapStateToProps = (state) => ({
@@ -30,4 +31,5 @@ export default connect(mapStateToProps, {
   getUsersTyping,
   stopUserTyping,
   clearMessages,
+  serverError,
 })(ChatView);

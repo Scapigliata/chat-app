@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 const Heading = styled.h4`
@@ -6,7 +6,8 @@ const Heading = styled.h4`
   text-align: center;
   position: fixed;
   top: 0;
-  margin-left: 50px;
+  margin-left: 70px;
+  background: white;
 `;
 
 const Message = ({ children, bool }) => {

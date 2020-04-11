@@ -55,7 +55,7 @@ const Messages = ({ userName, messages, usersTyping }) => {
             >
               <User currentUser={user === userName.name}>{user}</User>
               <Message>{message}</Message>
-              <Time>{moment(time).fromNow()}</Time>
+              <Time>{moment(time).format('h:mm a')}</Time>
             </MessageContainer>
           );
         })}
