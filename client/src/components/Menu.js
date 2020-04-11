@@ -18,7 +18,7 @@ const ListItemStyled = styled(ListItem)`
   flex-direction: column;
 `;
 
-const Options = ({ anchor, toggleDrawer, logout, chats, user, activeChat }) => (
+const Menu = ({ anchor, toggleDrawer, logout, chats, user, activeChat }) => (
   <div
     role="presentation"
     onClick={toggleDrawer(anchor, false)}
@@ -51,4 +51,4 @@ const Options = ({ anchor, toggleDrawer, logout, chats, user, activeChat }) => (
   </div>
 );
 
-export default Options;
+export default Menu;

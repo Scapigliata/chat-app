@@ -6,17 +6,9 @@ const {
   createUser,
   deleteUser,
   createMessage,
-  innactivityTimer,
+  setTimer,
 } = require('./services');
 let users = {};
-
-const setTimer = (user, socket) =>
-  innactivityTimer(60000, user, socket, () => {
-    io.emit(
-      'USER_DISCONNECTED',
-      createMessage(`${user.name} was disconnected due to innactivity`, user)
-    );
-  });
 
 module.exports = (socket) => {
   logger.info('A connection has been established', 'socketId:', socket.id);
@@ -34,7 +26,7 @@ module.exports = (socket) => {
     users = addUser(users, user);
     socket.user = user;
     io.emit('USER_CONNECTED', createMessage(null, socket.user.name));
-    setTimer(user, socket);
+    setTimer(60000, user, socket);
   });
 
   socket.on('TYPING', (user) => {
@@ -52,12 +44,17 @@ module.exports = (socket) => {
     }
   });
 
+  socket.on('USER_TIMEOUT', (user) => {
+    logger.info(`USER: ${socket.user.name} disconnected due to innactivity`);
+    users = deleteUser(users, user);
+  });
+
   socket.on('MESSAGE_SENT', ({ user, message }) => {
     logger.info(`USER: ${user.name} sent a message`);
     if (user) {
       clearTimeout(socket.user.timer);
     }
-    setTimer(user, socket);
+    setTimer(60000, user, socket);
     socket.messages = createMessage(message, user);
     io.emit('MESSAGE_RECIEVED', createMessage(message, user.name));
   });

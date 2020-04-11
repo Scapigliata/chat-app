@@ -5,6 +5,7 @@ import Form from '../../components/Form';
 import Drawer from '../../components/Drawer';
 import Chat from '../../components/Chat';
 import { USER_CONNECTED, USER_DISCONNECTED } from '../../store/actions/types';
+import Message from '../../components/Message';
 
 const URL = process.env.REACT_APP_URL;
 
@@ -13,12 +14,21 @@ const LandingPageView = ({
   socket,
   user,
   userConnected,
+  userDisconnected,
   clearMessages,
+  serverConnected,
+  serverDisconnected,
+  serverState,
 }) => {
   const initializeSocket = () => {
     const socket = io(URL);
     socket.on('connect', () => {
       console.log('Connection established');
+      serverConnected();
+    });
+    socket.on('disconnect', () => {
+      console.log('Server disconnected');
+      serverDisconnected();
     });
     initSocket(socket);
   };
@@ -30,12 +40,13 @@ const LandingPageView = ({
 
   const logout = (user) => {
     socket.emit(USER_DISCONNECTED, user);
-    userConnected(null);
+    userDisconnected();
     clearMessages();
   };
 
   useEffect(() => {
     initializeSocket();
+    // eslint-disable-next-line
   }, []);
 
   return (
@@ -48,6 +59,9 @@ const LandingPageView = ({
           <Chat />
         </>
       )}
+      <Message bool={serverState === 'Connected' ? true : false}>
+        {serverState}
+      </Message>
     </div>
   );
 };

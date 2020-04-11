@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import moment from 'moment';
 import { uuid } from 'uuidv4';
-import Typing from './Typing';
+import Typing from '../Typing';
 
 const Container = styled.div`
   width: 90vw;
@@ -26,6 +26,7 @@ const Time = styled.p`
 `;
 
 const TypingMessage = styled.i`
+  text-align: center;
   font-size: 10px;
   color: gray;
 `;
@@ -43,10 +44,10 @@ const Messages = ({ userName, messages, usersTyping }) => (
         );
       })}
     {Object.values(usersTyping).map(
-      (o) =>
-        o && (
-          <div key={o}>
-            <TypingMessage>{o} is typing...</TypingMessage>
+      (currentTypingUser) =>
+        currentTypingUser && (
+          <div key={currentTypingUser}>
+            <TypingMessage>{currentTypingUser} is typing...</TypingMessage>
             <Typing type="bubbles" color="blue" height={100} width={50} />
           </div>
         )

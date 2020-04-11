@@ -12,9 +12,11 @@ import {
   messageRecieved,
   userConnected,
   setUserTyping,
+  stopUserTyping,
+  clearMessages,
 } from '../../store/actions/actionCreators';
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   messages: getMessages(state),
   socket: getSocket(state),
   user: getUser(state),
@@ -26,4 +28,6 @@ export default connect(mapStateToProps, {
   userConnected,
   setUserTyping,
   getUsersTyping,
+  stopUserTyping,
+  clearMessages,
 })(ChatView);

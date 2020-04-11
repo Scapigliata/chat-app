@@ -1,12 +1,8 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import {
-  MESSAGE_RECIEVED,
-  TYPING,
-  USER_DISCONNECTED,
-} from '../../store/actions/types';
 import Messages from '../Messages';
 import ChatInput from '../ChatInput';
+import { socketManager } from '../../utils/socket';
 
 const ChatInputContainer = styled.div`
   position: fixed;
@@ -19,58 +15,32 @@ const Container = styled.div`
   margin: 0;
 `;
 
-const Chat = ({
+const ChatView = ({
   socket,
   user,
-  messages,
   messageRecieved,
   setUserTyping,
-  usersTyping,
+  stopUserTyping,
+  clearMessages,
 }) => {
   useEffect(() => {
     if (!socket) {
       return;
     }
 
-    socket.on('USER_CONNECTED', (data) =>
-      messageRecieved({
-        ...data,
-        message: `${data.user} has joined the chat`,
-      })
+    socketManager(
+      socket,
+      user,
+      messageRecieved,
+      setUserTyping,
+      stopUserTyping,
+      clearMessages
     );
-    socket.on(MESSAGE_RECIEVED, (data) => {
-      messageRecieved(data);
-    });
-    socket.on(USER_DISCONNECTED, (data) => {
-      const { name, id } = data.user;
-      const { message } = data;
-
-      messageRecieved({
-        ...data,
-        user: name,
-        message: message ? message : `${name} has disconnected from the chat`,
-      });
-      setUserTyping({
-        user: { id },
-      });
-    });
-
-    socket.on(TYPING, (userRes) => {
-      if (user.id === userRes.id) {
-        return;
-      }
-      setUserTyping(userRes);
-    });
-  }, [socket, setUserTyping, user.id, messageRecieved]);
+  }, [socket, user, setUserTyping, user.id, messageRecieved]);
 
   return (
     <Container>
-      <Messages
-        socket={socket}
-        userName={user}
-        messages={messages}
-        usersTyping={usersTyping}
-      />
+      <Messages socket={socket} userName={user} />
       <ChatInputContainer>
         <ChatInput user={user} socket={socket} />
       </ChatInputContainer>
@@ -78,4 +48,4 @@ const Chat = ({
   );
 };
 
-export default Chat;
+export default ChatView;

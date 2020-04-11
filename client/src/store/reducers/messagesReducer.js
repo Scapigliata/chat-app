@@ -2,6 +2,8 @@ import {
   MESSAGE_SENT,
   MESSAGE_RECIEVED,
   CLEAR_MESSAGES,
+  SET_USER_TYPING,
+  STOP_USER_TYPING,
 } from '../../store/actions/types';
 
 const initalState = {
@@ -18,17 +20,22 @@ const messagesReducer = (state = initalState, { type, payload }) => {
         messages: [...state.messages, payload],
       };
     case CLEAR_MESSAGES:
+      return { ...state, messages: [] };
+    case SET_USER_TYPING:
+      let newUsers = Object.assign({}, state.usersTyping);
+      if (state.usersTyping.hasOwnProperty(payload.id)) {
+        delete newUsers[payload.id];
+      } else {
+        newUsers[payload.id] = payload.name;
+      }
       return {
         ...state,
-        messages: [],
+        usersTyping: newUsers,
       };
-    case 'SET_USER_TYPING':
-      const { id, name } = payload;
+    case STOP_USER_TYPING:
       let users = Object.assign({}, state.usersTyping);
-      if (state.usersTyping.hasOwnProperty(id)) {
-        delete users[id];
-      } else {
-        users[id] = name;
+      if (state.usersTyping.hasOwnProperty(payload.id)) {
+        delete newUsers[payload.id];
       }
       return {
         ...state,

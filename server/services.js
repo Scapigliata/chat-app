@@ -34,11 +34,17 @@ const innactivityTimer = (time, user, socket, cb) => {
   }, time));
 };
 
+const setTimer = (time, user, socket) => {
+  innactivityTimer(time, user, socket, () => {
+    socket.emit('USER_TIMEOUT', { user });
+  });
+};
+
 module.exports = {
   createUser,
   createMessage,
   addUser,
   deleteUser,
   verifyUser,
-  innactivityTimer,
+  setTimer,
 };

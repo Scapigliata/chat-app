@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from 'react';
 import { Button, SwipeableDrawer } from '@material-ui/core';
-import Options from './Options';
+import Menu from './Menu';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -41,7 +41,7 @@ const Drawer = ({ logout, chats, user, activeChat }) => {
             onClose={toggleDrawer(anchor, false)}
             onOpen={toggleDrawer(anchor, true)}
           >
-            <Options
+            <Menu
               logout={logout}
               chats={chats}
               user={user}
