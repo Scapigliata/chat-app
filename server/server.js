@@ -19,12 +19,12 @@ const shutdownManager = new GracefulShutdownManager(server);
 
 process.on('SIGTERM', () => {
   shutdownManager.terminate(() => {
-    console.log('Server has terminated gracefully');
+    logger.info('Server has terminated gracefully');
   });
 });
 
 process.on('SIGINT', () => {
   shutdownManager.terminate(() => {
-    console.log('Server has terminated gracefully');
+    logger.info('Server has terminated gracefully');
   });
 });

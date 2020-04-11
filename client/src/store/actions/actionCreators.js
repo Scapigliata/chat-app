@@ -9,6 +9,7 @@ import {
   STOP_USER_TYPING,
   SERVER_CONNECTED,
   SERVER_DISCONNECTED,
+  SERVER_ERROR,
 } from './types';
 
 export const messageSent = (payload) => ({
@@ -56,4 +57,8 @@ export const serverConnected = () => ({
 
 export const serverDisconnected = () => ({
   type: SERVER_DISCONNECTED,
+});
+
+export const serverError = () => ({
+  type: SERVER_ERROR,
 });

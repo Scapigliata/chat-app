@@ -12,7 +12,8 @@ export const socketManager = (
   messageRecieved,
   setUserTyping,
   stopUserTyping,
-  clearMessages
+  clearMessages,
+  serverError
 ) => {
   socket.on(USER_CONNECTED, (data) => {
     messageRecieved({
@@ -48,5 +49,9 @@ export const socketManager = (
       return;
     }
     setUserTyping(userRes);
+  });
+
+  socket.on('connect_error', () => {
+    serverError();
   });
 };

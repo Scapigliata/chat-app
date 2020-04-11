@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import moment from 'moment';
 import { uuid } from 'uuidv4';
@@ -6,6 +6,7 @@ import Typing from '../Typing';
 
 const Container = styled.div`
   width: 90vw;
+  height: 90vh;
   margin: 20px;
 `;
 
@@ -25,34 +26,50 @@ const Time = styled.p`
   font-size: 10px;
 `;
 
+const TypingContainer = styled.div``;
+
 const TypingMessage = styled.i`
   text-align: center;
   font-size: 10px;
   color: gray;
 `;
 
-const Messages = ({ userName, messages, usersTyping }) => (
-  <Container>
-    {messages &&
-      messages.map(({ id, time, user, message }) => {
-        return (
-          <MessageContainer key={uuid()} currentUser={user === userName.name}>
-            <User currentUser={user === userName.name}>{user}</User>
-            <Message>{message}</Message>
-            <Time>{moment(time).fromNow()}</Time>
-          </MessageContainer>
-        );
-      })}
-    {Object.values(usersTyping).map(
-      (currentTypingUser) =>
-        currentTypingUser && (
-          <div key={currentTypingUser}>
-            <TypingMessage>{currentTypingUser} is typing...</TypingMessage>
-            <Typing type="bubbles" color="blue" height={100} width={50} />
-          </div>
-        )
-    )}
-  </Container>
-);
+const Messages = ({ userName, messages, usersTyping }) => {
+  const messagesEndRef = useRef(null);
+
+  useEffect(() => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [messages, usersTyping]);
+
+  return (
+    <Container>
+      {messages &&
+        messages.map(({ _, time, user, message }) => {
+          return (
+            <MessageContainer
+              ref={messagesEndRef}
+              key={uuid()}
+              currentUser={user === userName.name}
+            >
+              <User currentUser={user === userName.name}>{user}</User>
+              <Message>{message}</Message>
+              <Time>{moment(time).fromNow()}</Time>
+            </MessageContainer>
+          );
+        })}
+      {Object.values(usersTyping).map(
+        (currentTypingUser) =>
+          currentTypingUser && (
+            <TypingContainer key={currentTypingUser}>
+              <TypingMessage>{currentTypingUser} is typing...</TypingMessage>
+              <Typing type="bubbles" color="red" height={100} width={50} />
+            </TypingContainer>
+          )
+      )}
+    </Container>
+  );
+};
 
 export default Messages;

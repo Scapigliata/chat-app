@@ -36,7 +36,15 @@ const ChatView = ({
       stopUserTyping,
       clearMessages
     );
-  }, [socket, user, setUserTyping, user.id, messageRecieved]);
+  }, [
+    socket,
+    user,
+    setUserTyping,
+    user.id,
+    messageRecieved,
+    clearMessages,
+    stopUserTyping,
+  ]);
 
   return (
     <Container>
