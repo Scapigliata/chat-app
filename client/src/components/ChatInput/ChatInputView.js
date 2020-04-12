@@ -5,7 +5,7 @@ import {
   OutlinedInput,
   InputAdornment,
 } from '@material-ui/core';
-import { MESSAGE_SENT } from '../../store/actions/types';
+import { MESSAGE_SENT, TYPING } from '../../store/actions/types';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -33,12 +33,12 @@ const ChatInputView = ({ socket, user, setUserTyping, stopUserTyping }) => {
 
   useEffect(() => {
     if (message && message.length > 0 && !alertTyping) {
-      socket.emit('TYPING', user);
+      socket.emit(TYPING, user);
       toggleAlertTyping(true);
     }
 
     if ((!message || message.length === 0) && alertTyping) {
-      socket.emit('TYPING', user);
+      socket.emit(TYPING, user);
       toggleAlertTyping(false);
     }
   }, [message, alertTyping, socket, user]);

@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import Messages from '../Messages';
 import ChatInput from '../ChatInput';
 import { socketManager } from '../../utils/socket';
+import { USER_DISCONNECTED } from '../../store/actions/types';
+import Button from '../Button';
 
 const ChatInputContainer = styled.div`
   position: fixed;
@@ -15,17 +17,36 @@ const Container = styled.div`
   margin: 0;
 `;
 
+const ButtonStyled = styled(Button)`
+  position: fixed;
+  top: 0;
+  right: 0;
+  background: red;
+  padding: 10px;
+  color: white;
+  font-size: 12px;
+  cursor: pointer;
+  border: none;
+`;
+
 const ChatView = ({
   socket,
   user,
+  userDisconnected,
   messageRecieved,
   setUserTyping,
   stopUserTyping,
   clearMessages,
   serverError,
 }) => {
+  const logout = (user) => {
+    socket.emit(USER_DISCONNECTED, user);
+    socket.disconnect();
+    userDisconnected();
+  };
+
   useEffect(() => {
-    if (!socket) {
+    if (!user) {
       return;
     }
 
@@ -36,21 +57,23 @@ const ChatView = ({
       setUserTyping,
       stopUserTyping,
       clearMessages,
-      serverError
+      serverError,
+      userDisconnected
     );
-  }, [
-    socket,
-    user,
-    setUserTyping,
-    user.id,
-    messageRecieved,
-    clearMessages,
-    stopUserTyping,
-    serverError,
-  ]);
+    return () => {
+      socket.off();
+    };
+    // eslint-disable-next-line
+  }, [socket, messageRecieved]);
 
   return (
     <Container>
+      <ButtonStyled
+        title="Logout"
+        button
+        key="logout"
+        onClick={() => logout(user.name)}
+      />
       <Messages socket={socket} userName={user} />
       <ChatInputContainer>
         <ChatInput user={user} socket={socket} />

@@ -2,7 +2,6 @@ import {
   INIT_SOCKET,
   SERVER_CONNECTED,
   SERVER_DISCONNECTED,
-  SERVER_ERROR,
 } from '../actions/types';
 
 const initalState = {
@@ -18,8 +17,6 @@ const configReducer = (state = initalState, { type, payload }) => {
       return { ...state, serverState: 'Online' };
     case SERVER_DISCONNECTED:
       return { ...state, serverState: 'Offline' };
-    case SERVER_ERROR:
-      return { ...state, serverState: 'Error' };
     default:
       return state;
   }

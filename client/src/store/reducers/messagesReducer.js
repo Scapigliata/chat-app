@@ -1,5 +1,4 @@
 import {
-  MESSAGE_SENT,
   MESSAGE_RECIEVED,
   CLEAR_MESSAGES,
   SET_USER_TYPING,
@@ -13,7 +12,6 @@ const initalState = {
 
 const messagesReducer = (state = initalState, { type, payload }) => {
   switch (type) {
-    case MESSAGE_SENT:
     case MESSAGE_RECIEVED:
       return {
         ...state,

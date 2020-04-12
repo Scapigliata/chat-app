@@ -18,6 +18,7 @@ const verifyUser = (users, user) => {
 
 const deleteUser = (users, user) => {
   let userList = Object.assign({}, users);
+  console.log(user, 'user');
   delete userList[user.name];
   return userList;
 };
@@ -28,15 +29,15 @@ const addUser = (users, user) => {
   return userList;
 };
 
-const innactivityTimer = (time, user, socket, cb) => {
-  return (socket.user.timer = setTimeout(() => {
+const innactivityTimer = (time, user, cb) => {
+  return (user.timer = setTimeout(() => {
     cb(user);
   }, time));
 };
 
 const setTimer = (time, user, socket) => {
-  innactivityTimer(time, user, socket, () => {
-    socket.emit('USER_TIMEOUT', { user });
+  innactivityTimer(time, user, () => {
+    socket.emit('USER_DISCONNECTED', { user });
   });
 };
 

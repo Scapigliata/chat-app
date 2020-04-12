@@ -32,9 +32,8 @@ export const userConnected = (payload) => ({
   payload,
 });
 
-export const userDisconnected = (payload) => ({
+export const userDisconnected = () => ({
   type: USER_DISCONNECTED,
-  payload,
 });
 
 export const clearMessages = () => ({

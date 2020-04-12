@@ -11,6 +11,7 @@ import {
 import {
   messageRecieved,
   userConnected,
+  userDisconnected,
   setUserTyping,
   stopUserTyping,
   clearMessages,
@@ -27,6 +28,7 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
   messageRecieved,
   userConnected,
+  userDisconnected,
   setUserTyping,
   getUsersTyping,
   stopUserTyping,

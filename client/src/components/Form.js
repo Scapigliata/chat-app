@@ -40,6 +40,8 @@ const Form = ({ socket, createUser }) => {
       <Heading>Welcome</Heading>
       <form onSubmit={handleSubmit}>
         <TextField
+          autoFocus
+          autoComplete="false"
           error={error ? true : false}
           value={nickName}
           onChange={handleOnChange}

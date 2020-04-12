@@ -1,21 +1,19 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import io from 'socket.io-client';
 
 import Form from '../../components/Form';
-import Drawer from '../../components/Drawer';
 import Chat from '../../components/Chat';
-import { USER_CONNECTED, USER_DISCONNECTED } from '../../store/actions/types';
+import { USER_CONNECTED } from '../../store/actions/types';
 import Message from '../../components/Message';
 
 const URL = process.env.REACT_APP_URL;
 
 const LandingPageView = ({
+  clearMessages,
   initSocket,
   socket,
   user,
   userConnected,
-  userDisconnected,
-  clearMessages,
   serverConnected,
   serverDisconnected,
   serverState,
@@ -23,6 +21,7 @@ const LandingPageView = ({
   const initializeSocket = () => {
     const socket = io(URL);
     socket.on('connect', () => {
+      clearMessages();
       console.log('Connection established');
       serverConnected();
     });
@@ -38,27 +37,15 @@ const LandingPageView = ({
     userConnected(user);
   };
 
-  const logout = (user) => {
-    socket.emit(USER_DISCONNECTED, user);
-    userDisconnected();
-    clearMessages();
-  };
-
   useEffect(() => {
     initializeSocket();
+    return () => {};
     // eslint-disable-next-line
-  }, []);
+  }, [user]);
 
   return (
     <div>
-      {!user ? (
-        <Form socket={socket} createUser={createUser} />
-      ) : (
-        <>
-          <Drawer logout={logout} user={user} />
-          <Chat />
-        </>
-      )}
+      {!user ? <Form socket={socket} createUser={createUser} /> : <Chat />}
       <Message bool={serverState === 'Online' ? true : false}>
         {serverState}
       </Message>

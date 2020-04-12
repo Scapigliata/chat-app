@@ -2,7 +2,7 @@ import {
   MESSAGE_RECIEVED,
   TYPING,
   USER_DISCONNECTED,
-  USER_CONNECTED,
+  ADMIN_MESSAGE,
   USER_TIMEOUT,
 } from '../store/actions/types';
 
@@ -11,13 +11,12 @@ export const socketManager = (
   user,
   messageRecieved,
   setUserTyping,
-  stopUserTyping,
-  clearMessages,
-  serverError
+  stopUserTyping
 ) => {
-  socket.on(USER_CONNECTED, (data) => {
+  socket.on(ADMIN_MESSAGE, (data) => {
     messageRecieved({
       ...data,
+      user: 'Admin',
       message: `${data.user} has joined the chat`,
     });
   });
@@ -31,13 +30,12 @@ export const socketManager = (
   });
 
   socket.on(USER_DISCONNECTED, (data) => {
-    const { name, id } = data.user;
-    const { message } = data;
+    const { id } = data.user;
 
     messageRecieved({
       ...data,
-      user: name,
-      message: message ? message : `${name} has disconnected from the chat`,
+      user: 'Admin',
+      message: `${data.user} has disconnected from the chat`,
     });
     stopUserTyping({
       user: { id },
@@ -49,9 +47,5 @@ export const socketManager = (
       return;
     }
     setUserTyping(userRes);
-  });
-
-  socket.on('connect_error', () => {
-    serverError();
   });
 };

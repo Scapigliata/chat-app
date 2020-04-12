@@ -11,7 +11,7 @@ const {
 let users = {};
 
 module.exports = (socket) => {
-  logger.info('A connection has been established', 'socketId:', socket.id);
+  logger.info('A connection has been established');
 
   socket.on('USER_VERIFY', (nickName, cb) => {
     if (verifyUser(users, nickName)) {
@@ -23,10 +23,12 @@ module.exports = (socket) => {
 
   socket.on('USER_CONNECTED', (user) => {
     logger.info(`USER: ${user.name} is connected`);
-    users = addUser(users, user);
     socket.user = user;
-    io.emit('USER_CONNECTED', createMessage(null, socket.user.name));
-    setTimer(60000, user, socket);
+    if (user) {
+      io.emit('ADMIN_MESSAGE', createMessage(null, socket.user.name));
+    }
+    setTimer(120000, user, socket);
+    users = addUser(users, user);
   });
 
   socket.on('TYPING', (user) => {
@@ -34,28 +36,33 @@ module.exports = (socket) => {
     io.emit('TYPING', user);
   });
 
-  socket.on('USER_DISCONNECTED', () => {
-    logger.info(`USER: ${socket.user.name} disconnected`);
-    clearTimeout(socket.user.timer);
-    io.emit('USER_DISCONNECTED', createMessage(null, socket.user));
+  socket.on('USER_DISCONNECTED', (user) => {
+    logger.info(`USER: ${user} disconnected`);
+    clearTimeout(user.timer);
+    io.emit('USER_DISCONNECTED', createMessage(null, user));
 
-    if ('user' in socket) {
-      users = deleteUser(users, socket.user);
-    }
+    users = deleteUser(users, user);
+    console.log('userdisc');
   });
 
   socket.on('USER_TIMEOUT', (user) => {
     logger.info(`USER: ${socket.user.name} disconnected due to innactivity`);
-    users = deleteUser(users, user);
+    deleteUser(users, user);
   });
 
   socket.on('MESSAGE_SENT', ({ user, message }) => {
     logger.info(`USER: ${user.name} sent a message`);
     if (user) {
-      clearTimeout(socket.user.timer);
+      clearTimeout(user.timer);
     }
-    setTimer(60000, user, socket);
+    setTimer(120000, user, socket);
     socket.messages = createMessage(message, user);
-    io.emit('MESSAGE_RECIEVED', createMessage(message, user.name));
+    if (user) {
+      io.emit('MESSAGE_RECIEVED', createMessage(message, user.name));
+    }
+  });
+
+  socket.on('disconnect', () => {
+    logger.info('Client disconnected');
   });
 };
