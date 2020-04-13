@@ -26,8 +26,9 @@ export const socketManager = (
   });
 
   socket.on(USER_TIMEOUT, (data) => {
-    data.message = `${data.name} has disconnected due to innactivity`;
+    data.message = `${data.name} was disconnected due to innactivity`;
     socket.emit(USER_DISCONNECTED, data);
+    socket.disconnect();
   });
 
   socket.on(USER_DISCONNECTED, (data) => {

@@ -21,7 +21,9 @@ const LandingPageView = ({
   const _isMounted = useRef(true);
 
   const initializeSocket = () => {
-    const socket = io(URL);
+    const socket = io(URL, {
+      'force new connection': true,
+    });
     socket.on('connect', () => {
       clearMessages();
       console.log('Connection established');
@@ -30,6 +32,7 @@ const LandingPageView = ({
     socket.on('disconnect', () => {
       console.log('Server disconnected');
       serverDisconnected();
+      window.location.reload(false);
     });
     initSocket(socket);
   };

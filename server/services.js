@@ -29,14 +29,14 @@ const addUser = (users, user) => {
   return userList;
 };
 
-const innactivityTimer = (time, user, cb) => {
-  return (user.timer = setTimeout(() => {
+const innactivityTimer = (time, user, socket, cb) => {
+  return (socket.user.timer = setTimeout(() => {
     cb(user);
   }, time));
 };
 
 const setTimer = (time, user, socket) => {
-  innactivityTimer(time, user, () => {
+  innactivityTimer(time, user, socket, () => {
     socket.emit(USER_TIMEOUT, user);
   });
 };
