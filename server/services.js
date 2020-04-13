@@ -1,4 +1,5 @@
 const { uuid } = require('uuidv4');
+const { USER_TIMEOUT } = require('./types');
 
 const createUser = ({ name = '' } = {}) => ({
   id: uuid(),
@@ -36,7 +37,7 @@ const innactivityTimer = (time, user, cb) => {
 
 const setTimer = (time, user, socket) => {
   innactivityTimer(time, user, () => {
-    socket.emit('USER_DISCONNECTED', { user });
+    socket.emit(USER_TIMEOUT, user);
   });
 };
 

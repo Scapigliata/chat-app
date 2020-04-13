@@ -26,16 +26,18 @@ export const socketManager = (
   });
 
   socket.on(USER_TIMEOUT, (data) => {
+    data.message = `${data.name} has disconnected due to innactivity`;
     socket.emit(USER_DISCONNECTED, data);
   });
 
   socket.on(USER_DISCONNECTED, (data) => {
-    const { id } = data.user;
+    const { id, name } = data.user;
+    const { message } = data;
 
     messageRecieved({
       ...data,
       user: 'Admin',
-      message: `${data.user} has disconnected from the chat`,
+      message: message ? message : `${name} has left the chat`,
     });
     stopUserTyping({
       user: { id },

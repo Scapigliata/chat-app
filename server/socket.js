@@ -35,7 +35,7 @@ module.exports = (socket) => {
     logger.info(`USER: ${user.name} is connected`);
     socket.user = user;
 
-    setTimer(120000, user, socket);
+    setTimer(12000, user, socket);
     users = addUser(users, user);
     io.emit(ADMIN_MESSAGE, createMessage(null, socket.user.name));
   });
@@ -46,16 +46,12 @@ module.exports = (socket) => {
   });
 
   socket.on(USER_DISCONNECTED, (user) => {
-    logger.info(`USER: ${user} disconnected`);
-    clearTimeout(user.timer);
-    io.emit(USER_DISCONNECTED, createMessage(null, user));
-
-    users = deleteUser(users, user);
-  });
-
-  socket.on(USER_TIMEOUT, (user) => {
-    logger.info(`USER: ${socket.user.name} disconnected due to innactivity`);
-    io.emit(USER_DISCONNECTED, createMessage(null, { user }));
+    logger.info(`USER: ${socket.user.name} disconnected`);
+    clearTimeout(socket.user.timer);
+    io.emit(
+      USER_DISCONNECTED,
+      createMessage(user.message ? user.message : null, socket.user)
+    );
 
     users = deleteUser(users, user);
   });
