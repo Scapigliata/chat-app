@@ -1,33 +1,9 @@
 import React, { useEffect } from 'react';
-import styled from 'styled-components';
 import Messages from '../Messages';
 import ChatInput from '../ChatInput';
 import { socketManager } from '../../utils/socket';
 import { USER_DISCONNECTED } from '../../store/actions/types';
-import Button from '../Button';
-
-const ChatInputContainer = styled.div`
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  background: #fff;
-`;
-
-const Container = styled.div`
-  margin: 0;
-`;
-
-const ButtonStyled = styled(Button)`
-  position: fixed;
-  top: 0;
-  right: 0;
-  background: red;
-  padding: 10px;
-  color: white;
-  font-size: 12px;
-  cursor: pointer;
-  border: none;
-`;
+import { ChatInputContainer, Container, ButtonStyled } from './styles';
 
 const ChatView = ({
   socket,

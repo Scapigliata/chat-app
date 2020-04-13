@@ -1,40 +1,16 @@
 import React, { useEffect, useRef } from 'react';
-import styled from 'styled-components';
 import moment from 'moment';
 import { uuid } from 'uuidv4';
 import Typing from '../Typing';
-
-const Container = styled.div`
-  width: 90vw;
-  height: 90vh;
-  margin: 20px;
-`;
-
-const MessageContainer = styled.div`
-  text-align: ${({ currentUser, admin }) =>
-    admin ? 'center' : currentUser ? 'right' : 'left'};
-  margin-bottom: 60px;
-  margin-left: ${({ currentUser }) => (currentUser ? '200px' : '0')};
-`;
-
-const Message = styled.p``;
-
-const User = styled.h4`
-  color: ${({ currentUser, admin }) =>
-    admin ? 'green' : currentUser ? 'blue' : 'red'};
-`;
-
-const Time = styled.p`
-  font-size: 10px;
-`;
-
-const TypingContainer = styled.div``;
-
-const TypingMessage = styled.i`
-  text-align: center;
-  font-size: 10px;
-  color: gray;
-`;
+import {
+  Container,
+  MessageContainer,
+  Message,
+  User,
+  Time,
+  TypingContainer,
+  TypingMessage,
+} from './styles';
 
 const Messages = ({ userName, messages, usersTyping }) => {
   const messagesEndRef = useRef(null);

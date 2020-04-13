@@ -54,7 +54,6 @@ module.exports = (socket) => {
   });
 
   socket.on(USER_TIMEOUT, (user) => {
-    console.log(user);
     logger.info(`USER: ${socket.user.name} disconnected due to innactivity`);
     io.emit(USER_DISCONNECTED, createMessage(null, { user }));
 

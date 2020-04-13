@@ -6,22 +6,7 @@ import {
   InputAdornment,
 } from '@material-ui/core';
 import { MESSAGE_SENT, TYPING } from '../../store/actions/types';
-import styled from 'styled-components';
-
-const Container = styled.div`
-  width: 100vw;
-`;
-
-const Form = styled.form`
-  display: flex;
-`;
-
-const Button = styled.button`
-  background: ${({ disabled }) => (disabled ? 'darkseagreen' : 'green')};
-  color: ${({ disabled }) => (disabled ? '' : 'white')};
-  border: none;
-  width: 100px;
-`;
+import { Button, Container, Form } from './styles';
 
 const ChatInputView = ({ socket, user }) => {
   const [message, setMessage] = useState('');
