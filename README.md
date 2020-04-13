@@ -6,7 +6,7 @@ Realtime chat app using Socket.io.
 Client:
 React, Redux, React router dom, Socket.io-client, Styled Components, Material UI. 
 <br/>
-Deployed using [Netlify](https://5e945db595f5da7b2445495f--scapigliata-chat-app-client.netlify.com/).
+Deployed using [Netlify](https://scapigliata-chat-app-client.netlify.com/).
 
 <br/>
 
