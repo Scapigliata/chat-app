@@ -5,7 +5,6 @@ import styled from 'styled-components';
 import LandingPage from './pages/LandingPage';
 
 const Container = styled.div`
-  background: ;
   display: flex;
   background-size: cover;
   justify-content: center;

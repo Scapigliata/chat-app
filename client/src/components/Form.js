@@ -5,9 +5,15 @@ import { TextField } from '@material-ui/core';
 
 const Container = styled.div`
   text-align: center;
+  background: white;
+  border: 5px solid black;
+  border-radius: 5px;
+  padding: 100px 50px;
+  width: 250px;
+  height: 200px;
 `;
 const Heading = styled.h1`
-  margin-right: 20px;
+  margin: 0 20px 50px 0;
 `;
 const Button = styled.button`
   border: none;

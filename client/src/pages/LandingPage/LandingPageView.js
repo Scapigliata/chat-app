@@ -5,8 +5,19 @@ import Form from '../../components/Form';
 import Chat from '../../components/Chat';
 import { USER_CONNECTED } from '../../store/actions/types';
 import Message from '../../components/Message';
+import styled from 'styled-components';
+import PurpleBliss from '../../assets/PurpleBliss.jpg';
 
 const URL = process.env.REACT_APP_URL;
+
+const Container = styled.div`
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: ${({ user }) => (user ? '' : `url(${PurpleBliss})`)};
+`;
 
 const LandingPageView = ({
   clearMessages,
@@ -51,16 +62,16 @@ const LandingPageView = ({
   }, []);
 
   return (
-    <div>
+    <Container user={user}>
       {!user & _isMounted.current ? (
         <Form socket={socket} createUser={createUser} />
       ) : (
         <Chat />
       )}
-      <Message bool={serverState === 'Online' ? true : false}>
+      <Message user={user} bool={serverState === 'Online' ? true : false}>
         {serverState}
       </Message>
-    </div>
+    </Container>
   );
 };
 

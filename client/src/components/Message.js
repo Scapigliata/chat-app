@@ -6,12 +6,16 @@ const Heading = styled.h4`
   text-align: center;
   position: fixed;
   top: 0;
-  margin-left: 70px;
-  background: white;
+  left: ${({ user }) => (user ? '20px' : '')};
+  background: ${({ user }) => (user ? 'white' : '')};
 `;
 
-const Message = ({ children, bool }) => {
-  return <Heading bool={bool}>{children}</Heading>;
+const Message = ({ children, bool, user }) => {
+  return (
+    <Heading user={user} bool={bool}>
+      {children}
+    </Heading>
+  );
 };
 
 export default Message;
