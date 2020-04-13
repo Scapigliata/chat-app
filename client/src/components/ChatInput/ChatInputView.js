@@ -23,7 +23,7 @@ const Button = styled.button`
   width: 100px;
 `;
 
-const ChatInputView = ({ socket, user, setUserTyping, stopUserTyping }) => {
+const ChatInputView = ({ socket, user }) => {
   const [message, setMessage] = useState('');
   const [alertTyping, toggleAlertTyping] = useState(false);
 
@@ -41,6 +41,8 @@ const ChatInputView = ({ socket, user, setUserTyping, stopUserTyping }) => {
       socket.emit(TYPING, user);
       toggleAlertTyping(false);
     }
+
+    return () => {};
   }, [message, alertTyping, socket, user]);
 
   const handleOnSubmit = (e) => {

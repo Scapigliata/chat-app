@@ -64,7 +64,7 @@ const ChatView = ({
       socket.off();
     };
     // eslint-disable-next-line
-  }, [socket, messageRecieved]);
+  }, [socket, messageRecieved, user]);
 
   return (
     <Container>

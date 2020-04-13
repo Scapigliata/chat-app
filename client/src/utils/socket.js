@@ -14,6 +14,7 @@ export const socketManager = (
   stopUserTyping
 ) => {
   socket.on(ADMIN_MESSAGE, (data) => {
+    console.log(data);
     messageRecieved({
       ...data,
       user: 'Admin',
@@ -30,6 +31,7 @@ export const socketManager = (
   });
 
   socket.on(USER_DISCONNECTED, (data) => {
+    console.log(data);
     const { id } = data.user;
 
     messageRecieved({

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import io from 'socket.io-client';
 
 import Form from '../../components/Form';
@@ -18,6 +18,8 @@ const LandingPageView = ({
   serverDisconnected,
   serverState,
 }) => {
+  const _isMounted = useRef(true);
+
   const initializeSocket = () => {
     const socket = io(URL);
     socket.on('connect', () => {
@@ -39,13 +41,19 @@ const LandingPageView = ({
 
   useEffect(() => {
     initializeSocket();
-    return () => {};
+    return () => {
+      _isMounted.current = false;
+    };
     // eslint-disable-next-line
-  }, [user]);
+  }, []);
 
   return (
     <div>
-      {!user ? <Form socket={socket} createUser={createUser} /> : <Chat />}
+      {!user & _isMounted.current ? (
+        <Form socket={socket} createUser={createUser} />
+      ) : (
+        <Chat />
+      )}
       <Message bool={serverState === 'Online' ? true : false}>
         {serverState}
       </Message>

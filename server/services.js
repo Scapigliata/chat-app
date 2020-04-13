@@ -18,8 +18,7 @@ const verifyUser = (users, user) => {
 
 const deleteUser = (users, user) => {
   let userList = Object.assign({}, users);
-  console.log(user, 'user');
-  delete userList[user.name];
+  delete userList[user];
   return userList;
 };
 

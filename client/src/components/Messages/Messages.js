@@ -11,15 +11,17 @@ const Container = styled.div`
 `;
 
 const MessageContainer = styled.div`
-  text-align: ${({ currentUser }) => (currentUser ? 'right' : 'left')};
-  margin-bottom: 100px;
+  text-align: ${({ currentUser, admin }) =>
+    admin ? 'center' : currentUser ? 'right' : 'left'};
+  margin-bottom: 60px;
   margin-left: ${({ currentUser }) => (currentUser ? '200px' : '0')};
 `;
 
 const Message = styled.p``;
 
 const User = styled.h4`
-  color: ${({ currentUser }) => (currentUser ? 'blue' : 'red')};
+  color: ${({ currentUser, admin }) =>
+    admin ? 'green' : currentUser ? 'blue' : 'red'};
 `;
 
 const Time = styled.p`
@@ -51,9 +53,15 @@ const Messages = ({ userName, messages, usersTyping }) => {
             <MessageContainer
               ref={messagesEndRef}
               key={uuid()}
+              admin={user === 'Admin'}
               currentUser={user === userName.name}
             >
-              <User currentUser={user === userName.name}>{user}</User>
+              <User
+                admin={user === 'Admin'}
+                currentUser={user === userName.name}
+              >
+                {user}
+              </User>
               <Message>{message}</Message>
               <Time>{moment(time).format('h:mm a')}</Time>
             </MessageContainer>
