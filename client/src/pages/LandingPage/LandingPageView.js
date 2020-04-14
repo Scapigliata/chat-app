@@ -17,6 +17,8 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   background-image: ${({ user }) => (user ? '' : `url(${PurpleBliss})`)};
+  background-repeat: no-repeat;
+  background-size: cover;
 `;
 
 const LandingPageView = ({
