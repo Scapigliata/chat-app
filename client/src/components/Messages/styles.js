@@ -2,14 +2,18 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   width: 90vw;
-  height: 90vh;
   margin: 20px;
+  height: 60vh;
+  margin-bottom: 150px;
 `;
 
 export const MessageContainer = styled.div`
   text-align: ${({ currentUser, admin }) =>
     admin ? 'center' : currentUser ? 'right' : 'left'};
   margin-bottom: 60px;
+  @media (max-width: 600px) {
+    margin-bottom: 100px;
+  }
   margin-left: ${({ currentUser }) => (currentUser ? '200px' : '0')};
 `;
 

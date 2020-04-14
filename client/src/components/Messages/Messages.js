@@ -25,26 +25,25 @@ const Messages = ({ userName, messages, usersTyping }) => {
     <Container>
       {messages &&
         messages.map(({ _, time, user, message }) => {
+          const currentUser = user === userName.name;
+          const admin = user === 'Admin';
+
           return (
             <MessageContainer
               ref={messagesEndRef}
               key={uuid()}
-              admin={user === 'Admin'}
-              currentUser={user === userName.name}
+              admin={admin}
+              currentUser={currentUser}
             >
-              <User
-                admin={user === 'Admin'}
-                currentUser={user === userName.name}
-              >
+              <User admin={admin} currentUser={currentUser}>
                 {user}
               </User>
-              <Message
-                admin={user === 'Admin'}
-                currentUser={user === userName.name}
-              >
+              <Message admin={admin} currentUser={currentUser}>
                 {message}
               </Message>
-              <Time>{moment(time).format('h:mm a')}</Time>
+              <Time admin={admin} currentUser={currentUser}>
+                {moment(time).format('h:mm a')}
+              </Time>
             </MessageContainer>
           );
         })}

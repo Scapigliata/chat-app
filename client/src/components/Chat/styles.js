@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import Button from '../Button';
+import Messages from '../Messages';
 
 export const ChatInputContainer = styled.div`
   position: fixed;
@@ -22,4 +23,8 @@ export const ButtonStyled = styled(Button)`
   font-size: 12px;
   cursor: pointer;
   border: none;
+`;
+
+export const MessagesStyled = styled(Messages)`
+  margin-bottom: 200px;
 `;

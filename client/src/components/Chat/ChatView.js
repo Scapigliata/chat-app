@@ -1,9 +1,13 @@
 import React, { useEffect } from 'react';
-import Messages from '../Messages';
 import ChatInput from '../ChatInput';
 import { socketManager } from '../../utils/socket';
 import { USER_DISCONNECTED } from '../../store/actions/types';
-import { ChatInputContainer, Container, ButtonStyled } from './styles';
+import {
+  ChatInputContainer,
+  Container,
+  ButtonStyled,
+  MessagesStyled,
+} from './styles';
 
 const ChatView = ({
   socket,
@@ -50,7 +54,7 @@ const ChatView = ({
         key="logout"
         onClick={() => logout(user.name)}
       />
-      <Messages socket={socket} userName={user} />
+      <MessagesStyled socket={socket} userName={user} />
       <ChatInputContainer>
         <ChatInput user={user} socket={socket} />
       </ChatInputContainer>
