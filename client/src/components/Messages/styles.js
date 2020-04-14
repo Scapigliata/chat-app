@@ -5,14 +5,16 @@ export const Container = styled.div`
   margin: 20px;
   height: 60vh;
   margin-bottom: 150px;
+  div:last-child {
+    padding-bottom: 100px;
+  }
 `;
 
 export const MessageContainer = styled.div`
   text-align: ${({ currentUser, admin }) =>
     admin ? 'center' : currentUser ? 'right' : 'left'};
-  margin-bottom: 60px;
   @media (max-width: 600px) {
-    margin-bottom: 100px;
+    margin-bottom: 30px;
   }
   margin-left: ${({ currentUser }) => (currentUser ? '200px' : '0')};
 `;
